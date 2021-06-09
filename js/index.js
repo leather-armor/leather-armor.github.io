@@ -30,7 +30,7 @@ $('#color').on('input', e => {
         el.val(el.val().replace(/(#.*)#/, '$1'));
         caretPosition--;
     }
-    let disallowedCharacters = /[^0-9#a-fA-F]/
+    let disallowedCharacters = /[^0-9#a-fA-F]/;
     if (el.val().match(disallowedCharacters)) {
         el.val((el.val().replace(disallowedCharacters, '')));
         caretPosition--;

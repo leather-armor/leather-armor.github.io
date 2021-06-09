@@ -170,6 +170,7 @@ main {
     flex-grow: 1;
     display: flex;
     height: 100%;
+    margin: 1rem 0;
 }
 main > section {
     width: 50%;
@@ -201,11 +202,8 @@ main > section {
     font-family: Consolas, "Times New Roman", Times, serif;
     text-align: center;
 }
-.text-input input::first-letter {
-    color: red;
-}
 #picker {
-    margin-top: 1em;
+    margin: 1em 0;
 }
 .IroWheel, .IroSlider {
     border: 1px solid black;
@@ -328,7 +326,6 @@ canvas {
 */
 footer {
     background: var(--col-bg3);
-    margin-top: 1rem;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -357,7 +354,7 @@ footer {
 .github-button-wrapper a:focus,
 .github-button-wrapper a:active {
     width: 200px;
-    background: var(--col-bg3);
+    background: var(--col-bg2);
     color: white;
 }
 
@@ -387,17 +384,50 @@ footer {
 =============================
 */
 @media screen and (max-width: 520px) {
+    header {
+        padding-left: 1rem;
+        height: 3.4rem;
+    }
+    header img {
+        margin-right: 0.5rem;
+        width: 3rem;
+    }
+    header .name {
+        font-size: 1.25rem;
+    }
+    header .version {
+        font-size: 0.8rem;
+    }
+    main {
+        flex-direction: column;
+    }
+    main > section {
+        width: 100%;
+    }
+    #inputs {
+        border: none;
+        border-bottom: 1px solid var(--col-acc);
+    }
     #outputs a, #outputs a img {
-        width: 120px;
-        height: 120px;
+        width: 80px;
+        height: 80px;
     }
     .text-input, .text-input * {
-        width: 100px !important;
+        width: 120px !important;
     }
     .text-input span {
         font-size: 1rem;
+        text-align: center;
     }
     .text-input input {
         font-size: 1.4rem;
+    }
+}
+@media screen and (max-width: 380px) {
+    header .name {
+        font-size: 1rem;
+    }
+    header .version {
+        font-size: 0.6rem;
     }
 }
