@@ -11,8 +11,7 @@
     --col-bg3: #323232;
     --col-acc: #444;
     --col-acc2: #4a4a4a;
-    --orange: #cc9933;
-    --state-shadow: 0 0 3px 2px var(--orange);
+    --state-shadow: 0 0 3px 2px white;
 }
 
 /* normalize margins and paddings */
@@ -67,58 +66,11 @@ body {
     border-radius: 4px;
 }
 
-/* checkboxes */
-.checkbox-custom {
-    position: absolute;
-    opacity: 0;
-}
-
-.checkbox-label {
-    display: flex;
-    gap: 4px;
-    align-items: center;
-}
-
-.checkbox-label .checkbox i {
-    display: none;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-}
-
-.checkbox-custom:checked~label .checkbox i:nth-of-type(1) {
-    display: initial;
-    opacity: 1;
-}
-
-.checkbox-custom:not(:checked)~label .checkbox i:nth-of-type(2) {
-    display: initial;
-    opacity: 1
-}
-
 /* hover and focus effect for buttons and inputs */
 input:focus,
 textarea:focus {
     outline: none;
     box-shadow: var(--state-shadow);
-}
-
-/* buttons */
-button {
-    width: max-content;
-    height: max-content;
-    padding: 0.2rem 0.3rem;
-    border-radius: 4px;
-    border: 1px solid var(--col-acc);
-    background-color: var(--col-bg2);
-    color: white;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-button:disabled {
-    opacity: 50%;
-    color: #AAA;
-    cursor: default;
 }
 
 /*  
@@ -204,6 +156,7 @@ main > section {
 #picker {
     margin: 1em 0;
 }
+/* color wheel fixes */
 .IroWheel, .IroSlider {
     border: 1px solid black;
     border-radius: 999px;
@@ -243,7 +196,7 @@ main > section {
     color: red;
 }
 .other-values .green {
-    color: green;
+    color: #0f0;
 }
 .other-values .blue {
     color: blue;
@@ -283,6 +236,7 @@ canvas {
     font-size: 20px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 300;
+    color: white;
 }
 .contributors button i {
     transition: transform 0.4s ease;

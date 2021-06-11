@@ -1,3 +1,5 @@
+import { updateColorsList } from './color_models.js';
+
 let canvasH = document.querySelector("#helmet");
 let ctxH = canvasH.getContext("2d");
 
@@ -64,10 +66,11 @@ function _allLoadingFinished() {
         if (tColor.match(/[A-Fa-f0-9]{6}/g)) {
             this.value = tColor;
             updateColor(tColor, "p");
-            colorElem.style.border = "2px dotted black";
+            updateColorsList();
+            colorElem.classList.remove('invalid');
             draw();
         } else {
-            colorElem.style.border = "2px dotted red";
+            colorElem.classList.add('invalid');
         }
     };
     colorElem.oninput = colorElem.onchange;
@@ -77,6 +80,7 @@ function _allLoadingFinished() {
     });
     colorPicker.on('color:change', function (color) {
         updateColor(color.hexString, "e");
+        updateColorsList();
         draw();
         state = "timeout";
         setTimeout(function () {
