@@ -13,6 +13,7 @@
 
     <script type="module" src="js/index.js"></script>
     <script type="module" src="js/contributors.js"></script>
+    <script type="module" src="js/color_models.js"></script>
     
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="icon" href="./favicon.png" />
@@ -33,6 +34,27 @@
                 <input id="color" type="text" value="#FF0000" maxlength="7">
             </div>
             <div id="picker"></div>
+            <table class="other-values">
+                <thead>
+                    <tr>
+                        <th colspan="2">Other color values</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span>HEX</span></td>
+                        <td id="color-hex" class="code"></td>
+                    </tr>
+                    <tr>
+                        <td><span>RGB</span></td>
+                        <td id="color-rgb" class="code"></td>
+                    </tr>
+                    <tr>
+                        <td><span>HSL</span></td>
+                        <td id="color-hsl" class="code"></td>
+                    </tr>
+                </tbody>
+            </table>
         </section>
         
         <section id="outputs">

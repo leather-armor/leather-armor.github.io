@@ -1,4 +1,3 @@
-@import './toast.css';
 /* font-awesome */
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css");
 /* fonts */
@@ -217,6 +216,43 @@ main > section {
 }
 .IroSlider {
     background: black !important;
+}
+/* color values */
+.other-values * {
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+}
+.other-values th {
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+.other-values tr td:first-of-type span {
+    margin-right: 1rem;
+}
+.other-values tr td:nth-of-type(2) {
+    width: 220px;
+}
+.other-values tr td:nth-of-type(2) * {
+    font-family: 'Fira Code', monospace;
+}
+.other-values tr td:nth-of-type(2) span:not([class]) {
+    color: gray;
+}
+.other-values .red {
+    color: red;
+}
+.other-values .green {
+    color: green;
+}
+.other-values .blue {
+    color: blue;
+}
+.other-values .gray {
+    color: darkgray;
+}
+.other-values .white {
+    color: #EEE;
 }
 /* outputs */
 #outputs {
