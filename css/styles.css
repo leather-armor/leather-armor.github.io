@@ -153,6 +153,31 @@ main > section {
     font-family: Consolas, "Times New Roman", Times, serif;
     text-align: center;
 }
+.text-input .suggestions {
+    margin-top: 0.5rem;
+    height: 50px;
+}
+.text-input .suggestions-label {
+    font-size: 0.9rem;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 200;
+}
+.text-input .suggestions li {
+    margin-left: 1.4rem;
+}
+.text-input .suggestions li a {
+    position: relative;
+    left: -6px;
+    font-family: monospace;
+    font-size: 0.9rem;
+    color: darkgray;
+    border-bottom: 1px dotted currentColor;
+}
+.text-input .suggestions ::marker {
+    color: darkgray;
+    font-size: smaller;
+}
 #picker {
     margin: 1em 0;
 }
@@ -171,6 +196,9 @@ main > section {
     background: black !important;
 }
 /* color values */
+.other-values {
+    margin-bottom: 1rem;
+}
 .other-values * {
     color: white;
     font-family: 'Montserrat', sans-serif;
@@ -374,7 +402,7 @@ footer {
         Responsivenes
 =============================
 */
-@media screen and (max-width: 520px) {
+@media screen and (max-width: 630px) {
     header {
         padding-left: 1rem;
         height: 3.4rem;

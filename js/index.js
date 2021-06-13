@@ -19,6 +19,8 @@ function updateColor(c, mode = "") {
     colorHash = "#" + c;
     if (mode !== "p") colorElem.value = colorHash;
     if (mode !== "e") colorPicker.color.hexString = colorHash;
+    suggestElem[0].text = "";
+    suggestElem[1].text = "";
 }
 
 $('#color').on('input', e => {
@@ -54,24 +56,52 @@ const IMAGE = {
     leggings_overlay: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAOUlEQVQ4jWNgGAXDEZgoiv43URT9T6w4hqKpcdb/izz0/iuK8v4nJI7VgCIPPawGYBOnvhdGAXkAAA+nJbnHlRzjAAAAAElFTkSuQmCC",
     boots_overlay: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAASElEQVQ4jWNgGAWjgJrARFH0PzJbUZQXhY8uj6F5apz1f5jCIg89DAOKPPRwysMVwDCKJBQoivLiVgNzMgzj8iayGnzqhhgAAAgFNfwN37/qAAAAAElFTkSuQmCC",
 };
-
 function _allLoadingFinished() {
     state = "active";
 
     colorElem = document.querySelector("#color");
+    suggestElem = $(".text-input a.suggestion");
     draw();
     colorElem.onchange = function () {
         var tColor = this.value;
         tColor = tColor.toUpperCase();
-        if (tColor.match(/[A-Fa-f0-9]{6}/g)) {
+        $('.text-input .suggestions-label').addClass('hidden');
+        $('.text-input .suggestions li').addClass('hidden');
+        if (tColor.match(/[A-F0-9]{6}/g)) {
             this.value = tColor;
             updateColor(tColor, "p");
             updateColorsList();
             colorElem.classList.remove('invalid');
             draw();
+        } else if (tColor.match(/^#[A-F0-9]{1,5}$/g)) {
+            let sugg1 = "#" + "0".repeat(7 - tColor.length) + tColor.replace('#', '');
+            $(suggestElem[0]).attr("value", sugg1);
+            $(suggestElem[0]).html(sugg1);
+            $(suggestElem[1]).html('');
+            $('.text-input .suggestions-label').removeClass('hidden');
+            $('.text-input .suggestions li:nth-of-type(1)').removeClass('hidden');
+
+            if (tColor.length === 4) {
+                let sugg2 = '#' + tColor[1].repeat(2) + tColor[2].repeat(2) + tColor[3].repeat(2);
+                if (sugg1 != sugg2) {
+                    $(suggestElem[1]).html(sugg2);
+                    $('.text-input .suggestions li:nth-of-type(2)').removeClass('hidden');
+                }
+            }
         } else {
             colorElem.classList.add('invalid');
+            $(suggestElem[0]).html('');
+            $(suggestElem[1]).html('');
         }
+
+        function setColor() {
+            let c = this.getAttribute("value");
+            updateColor(c);
+            $('.text-input .suggestions-label').addClass('hidden');
+            $('.text-input .suggestions li').addClass('hidden');
+        }
+        $(suggestElem[0]).click(setColor);
+        $(suggestElem[1]).click(setColor);
     };
     colorElem.oninput = colorElem.onchange;
 
