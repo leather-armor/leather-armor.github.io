@@ -70,6 +70,6 @@ export function updateColorsList() {
     $('#color-hsl').html(`<span>hsl(</span><span class="red">${h}</span><span>, </span><span class="gray">${s}%</span><span>, </span><span class="white">${l}%</span><span>)</span>`)
     
     //update input state shadow
-    $('#color').css("--state-shadow", `0 0 3px 2px ${$('#color').val()}`);
+    $('body').css("--curcol", $('#color').val());
 }
 updateColorsList();

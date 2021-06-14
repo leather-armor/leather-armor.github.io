@@ -11,7 +11,8 @@
     --col-bg3: #323232;
     --col-acc: #444;
     --col-acc2: #4a4a4a;
-    --state-shadow: 0 0 3px 2px white;
+    --curcol: red;
+    --state-shadow: 0 0 3px 2px var(--curcol);
 }
 
 /* normalize margins and paddings */
@@ -150,6 +151,7 @@ main > section {
     width: 5em;
     border: 2px dotted black;
     font-size: 2em;
+    box-shadow: var(--state-shadow);
     font-family: Consolas, "Times New Roman", Times, serif;
     text-align: center;
 }
@@ -431,7 +433,7 @@ footer {
         width: 80px;
         height: 80px;
     }
-    .text-input, .text-input * {
+    .text-input, .text-input input {
         width: 120px !important;
     }
     .text-input span {

@@ -1,18 +1,28 @@
 import { updateColorsList } from './color_models.js';
+import { draw } from './draw.js';
 
 let canvasH = document.querySelector("#helmet");
-let ctxH = canvasH.getContext("2d");
 
 let canvasC = document.querySelector("#chestplate");
-let ctxC = canvasC.getContext("2d");
 
 let canvasL = document.querySelector("#leggings");
-let ctxL = canvasL.getContext("2d");
 
 let canvasB = document.querySelector("#boots");
-let ctxB = canvasB.getContext("2d");
+export let allCanvas = {
+    h: document.querySelector("#helmet"),
+    c: document.querySelector("#chestplate"),
+    l: document.querySelector("#leggings"),
+    b: document.querySelector("#boots"),
+}
+export let allCTX = {
+    h: canvasH.getContext("2d"),
+    c: canvasC.getContext("2d"),
+    l: canvasL.getContext("2d"),
+    b: canvasB.getContext("2d"),
+}
 
-var colorPicker, colorElem, colorDigit, colorHash, assets, state;
+var colorPicker, colorElem, suggestElem;
+export var state, colorHash, assets
 
 function updateColor(c, mode = "") {
     c = c.toUpperCase().replace("#", "");
@@ -43,7 +53,7 @@ $('#color').on('input', e => {
     el[0].setSelectionRange(caretPosition, caretPosition);
 });
 
-const ITEM_SCALE = 10;
+export const ITEM_SCALE = 10;
 const IMAGE = {
     helmet: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAT0lEQVQ4jWNgGJ4gODj4f3Bw8H9cfIKa3759i6F427Zt/01NTfEbAtOMywCChlDVAGQ/m5qa/ifJAGwBBjOEPgZgU0SUATBDcBlAUPMIBQCmcXrRa5Y27gAAAABJRU5ErkJggg==",
     chestplate: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAfUlEQVQ4jc2QwRHAIAgEaYpKrkKbuK6ogbx0iIrR5BNm/MDewijyuwLgAHy3PwBm5iRvcO2bmQNwVfUhTLJBJG9QFMzmAxC3zWZTQbwggrPeIMiu6AVpOJOUUprkMZx91vZ2ERFV/XZBL+jD24IK1wuOBBE+FlTJ6i3Db+oCbcOJaq/MgTUAAAAASUVORK5CYII=",
@@ -122,82 +132,6 @@ function _allLoadingFinished() {
         draw();
     });
     updateColor("FF0000");
-}
-
-function draw() {
-    if (state != "active") {
-        return;
-    }
-
-    const color = colorHash;
-
-    _drawPiece(canvasH, ctxH, "helmet", color);
-    _drawPiece(canvasC, ctxC, "chestplate", color);
-    _drawPiece(canvasL, ctxL, "leggings", color);
-    _drawPiece(canvasB, ctxB, "boots", color);
-}
-
-function _drawPiece(canvas, ctx, name, color) {
-    let {
-        file,
-        x,
-        y,
-        scale
-    } = {
-        x: 0,
-        y: 0,
-        scale: ITEM_SCALE,
-        file: assets.files[name]
-    };
-    let {
-        asset,
-        width,
-        height
-    } = file;
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Prevents blur
-    ctx.imageSmoothingEnabled = false;
-
-    // https://stackoverflow.com/a/45201094/1411473
-    // step 1: draw in original image
-    ctx.globalCompositeOperation = "source-over";
-    ctx.drawImage(asset, x, y, width * scale, height * scale);
-
-    // step 2: multiply color
-    ctx.globalCompositeOperation = "multiply";
-    ctx.fillStyle = color;
-    ctx.fillRect(x, y, width * scale, height * scale);
-
-    // step 4: in our case, we need to clip as we filled the entire area
-    ctx.globalCompositeOperation = "destination-in";
-    ctx.drawImage(asset, x, y, width * scale, height * scale);
-
-    // step 5: reset comp mode to default
-    ctx.globalCompositeOperation = "source-over";
-
-    let {
-        file2,
-        x2,
-        y2,
-        scale2
-    } = {
-        x2: 0,
-        y2: 0,
-        scale2: ITEM_SCALE,
-        file2: assets.files[name + "_overlay"]
-    };
-    let {
-        asset: asset2,
-        width: width2,
-        height: height2
-    } = file2;
-    ctx.drawImage(asset2, x2, y2, width2 * scale2, height2 * scale2);
-
-    document.querySelector("#" + name + "_img").src = canvas.toDataURL("image/png");
-    document.querySelector("#" + name + "_lnk").href = canvas.toDataURL("image/png");
-    document.querySelector("#" + name + "_lnk").download = "Dyed " + name + " " + color + ".png";
 }
 
 window.onload = function () {
