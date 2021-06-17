@@ -28,6 +28,36 @@
         </span>
     </header>
     <main>
+        <div class="imports">
+            <div class="imports-list hidden disallow-focusing">
+                <h1>Import Color</h1>
+                <h2>
+                    Choose input color model 
+                    <span class="tip" title="The color that should be converted to HEX.">?</span>
+                </h2>
+                <div class="color-model">
+                    <input type="radio" name="select" id="option1">
+                    <input type="radio" name="select" id="option2" checked>
+                    <button id="button-model-rgb" class="btn-option btn-option1">
+                        <label for="option1" class="option">
+                            <div class="dot"></div>
+                            <span class="unselectable">RGB</span>
+                        </label>
+                    </button>
+                    <button id="button-model-int" class="btn-option btn-option2">
+                        <label for="option2" class="option">
+                            <div class="dot"></div>
+                            <span class="unselectable">Integer</span>
+                        </label>
+                    </button>
+                </div>
+                <div class="input-form">
+                    <input type="text" name="color-import" id="color-import">
+                    <button type="submit" id="color-import-submit">Load</button>
+                </div>
+            </div>
+            <button id="show-imports"><i class="fas fa-exchange-alt"></i></button>
+        </div>
         <section id="inputs">
             <div class="text-input">
                 <span>HEX Color</span>

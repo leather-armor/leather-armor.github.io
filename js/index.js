@@ -1,5 +1,7 @@
 import { updateColorsList } from './color_models.js';
 import { draw } from './draw.js';
+import { loadColorFromModel } from './color_import.js';
+import { saveToLocalStorage, loadFromLocalStorage } from './local_storage.js';
 
 let canvasH = document.querySelector("#helmet");
 
@@ -21,8 +23,8 @@ export let allCTX = {
     b: canvasB.getContext("2d"),
 }
 
-var colorPicker, colorElem, suggestElem;
-export var state, colorHash, assets
+var colorElem, suggestElem;
+export var colorPicker, state, colorHash, assets
 
 function updateColor(c, mode = "") {
     c = c.toUpperCase().replace("#", "");
@@ -134,6 +136,43 @@ function _allLoadingFinished() {
     updateColor("FF0000");
 }
 
+$('#show-imports').on('click', () => {
+    showHideMenu($('.imports-list'));
+});
+
+window.onscroll = () => {
+    if (!$('.imports-list').hasClass('hidden') && !$('.imports-list').isInViewport()) {
+        showHideMenu($('.imports-list'))
+    }
+};
+export function showHideMenu(el) {
+    el.removeClass('disallow-focusing');
+    setTimeout(() => {
+        el.toggleClass('hidden');
+        if (el.hasClass('hidden')) {
+            setTimeout(() => {
+                el.addClass('disallow-focusing');
+            }, 200);
+        }
+    }, 50);
+}
+$.fn.isInViewport = function() {
+    var elementTop = $(this).offset().top;
+    var elementBottom = elementTop + $(this).outerHeight();
+    var viewportTop = $(window).scrollTop();
+    var viewportBottom = viewportTop + $(window).height();
+    return elementBottom > viewportTop && elementTop < viewportBottom;
+};
+
+$('#color-import-submit').click(loadColorFromModel)
+
+$('.color-model #option1').change(() => {
+    saveToLocalStorage('cur-color-model', 0);
+})
+$('.color-model #option2').change(() => {
+    saveToLocalStorage('cur-color-model', 1);
+})
+
 window.onload = function () {
     assets = new AssetManager();
 
@@ -151,6 +190,12 @@ window.onload = function () {
             ["boots_overlay", IMAGE.boots_overlay],
         ])
         .then(_allLoadingFinished);
+    
+    let selectedColorModel = Number(loadFromLocalStorage('cur-color-model'));
+    $('.color-model input').each((index, el) => {
+        if (index == selectedColorModel) el.checked = true;
+        else el.checked = false;
+    });
 }
 
 var AssetManager = (function () {

@@ -3,7 +3,8 @@ const contributors = {
         "Converted the tool from JSFiddle to standalone website",
         "Revamped the design",
         "Owner of the Github repo",
-        "Created the contributors list"
+        "Created the contributors list",
+        "Created the color imports menu",
     ],
     MonkeysHK: [
         "Added the fancy color picker",
